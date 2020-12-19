@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Course List</title>
+</head>
+<body>
+<div><a th:href="@{/home}">Home</a></div>
+<h4>Course(s) <a th:href="@{/course/edit/0}">add</a></h4>
+<table border="1" cellpadding="10" cellspacing="0">
+    <thead>
+    <th>Title</th>
+    <th>Instructor</th>
+    <th>Action</th>
+    </thead>
+    <tbody th:each="course : ${courseList}">
+    <tr>
+        <td th:text="${course.title}">course title</td>
+        <td th:text="${course.instructor.name}">instructor</td>
+        <td>
+            <a th:href="@{/course/edit/{id}(id=${course.id})}">edit</a>
+            <span> / </span>
+            <a th:href="@{/course/delete/{id}(id=${course.id})}">delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

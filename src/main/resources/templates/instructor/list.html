@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Instructor List</title>
+</head>
+<body>
+<div><a th:href="@{/home}">Home</a></div>
+<h4>Instructor(s) <a th:href="@{/instructor/edit/0}">add</a></h4>
+<table border="1" cellpadding="10" cellspacing="0">
+    <thead>
+    <tr>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Email</th>
+        <th>Website</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody th:each="inst : ${instructorList}">
+    <tr>
+        <td th:text="${inst.firstName}">first name</td>
+        <td th:text="${inst.lastName}">last name</td>
+        <td th:text="${inst.email}">email</td>
+        <td th:text="${inst.detail.website}">website</td>
+        <td>
+            <a th:href="@{/instructor/edit/{id}(id=${inst.id})}">edit</a>
+            <span> / </span>
+            <a th:href="@{/instructor/delete/{id}(id=${inst.id})}">delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

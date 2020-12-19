@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Instructor</title>
+</head>
+<body>
+<h4>Edit Instructor</h4>
+<form action="#" method="post" th:action="@{/instructor/update}" th:object="${instructor}">
+    <input th:field="*{id}" type="hidden"/>
+    <p>First name: <input th:field="*{firstName}"/></p>
+    <p>Last name: <input th:field="*{lastName}"/></p>
+    <p>Email: <input th:field="*{email}"/></p>
+    <div th:field="*{detail}">
+        <input th:field="*{detail.id}" type="hidden"/>
+        <p>Website: <input th:field="*{detail.website}"/></p>
+    </div>
+    <p>
+        Course(s):
+        <select multiple th:field="*{courseList}">
+            <option th:each="course : ${courseList}"
+                    th:text="${course.title}"
+                    th:value="${course.id}">course
+            </option>
+        </select>
+    </p>
+    <input type="submit" value="+ add instructor">
+</form>
+</body>
+</html>
