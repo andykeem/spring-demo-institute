@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Instructor Detail</title>
+</head>
+<body>
+<h4>Edit Instructor Detail</h4>
+<form action="#" method="post" th:action="@{/instructor-detail/save}" th:object="${detail}">
+    <input th:field="*{id}" type="hidden"/>
+    <input th:field="*{instructor.id}" type="hidden"/>
+    <p>Website: <input th:field="*{website}"/></p>
+    <input type="submit" value="save"/>
+</form>
+</body>
+</html>

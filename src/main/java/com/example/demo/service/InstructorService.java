@@ -6,6 +6,7 @@ import com.example.demo.repository.InstructorRepository;
 import com.example.demo.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,9 +18,12 @@ public class InstructorService {
 
     private final Logger log = LoggerFactory.getLogger(InstructorService.class);
     private final InstructorRepository instRepo;
+    private final InstructorDetailService instDetailService;
 
-    public InstructorService(InstructorRepository instRepo) {
+    @Autowired
+    public InstructorService(InstructorRepository instRepo, InstructorDetailService instDetailService) {
         this.instRepo = instRepo;
+        this.instDetailService = instDetailService;
     }
 
     public List<Instructor> findAll() {
@@ -37,6 +41,13 @@ public class InstructorService {
     }
 
     public void save(Instructor inst) {
+        // TODO: 12/21/20 - can we save below line from the InstructionDetailService?
+//        inst.setInstructorDetail(inst.getDetail());
+
+        /*InstructorDetail detail = inst.getDetail();
+        detail.setInstructor(inst);
+        instDetailService.save(detail);*/
+
         instRepo.save(inst);
     }
 

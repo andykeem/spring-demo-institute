@@ -6,7 +6,7 @@
 </head>
 <body>
 <h4>Edit Course</h4>
-<form action="#" method="post" th:action="@{/course/update}" th:object="${course}">
+<form action="#" method="post" th:action="@{/course/save}" th:object="${course}">
     <p>
         <label>Title:</label> <input th:field="*{title}">
     </p>
@@ -17,7 +17,7 @@
             </option>
         </select>
     </p>
-    <input type="submit" value="+ Add Course">
+    <input type="submit" value="save">
 </form>
 </body>
 </html>

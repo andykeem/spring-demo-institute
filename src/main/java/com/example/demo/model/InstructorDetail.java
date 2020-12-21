@@ -14,13 +14,19 @@ public class InstructorDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(unique = true)
     private String website;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "instructor_id", nullable = false)
+    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "instructor_id") // , unique = true)
     private Instructor instructor;
 
     public InstructorDetail(String website) {
         this.website = website;
     }
+
+    /*public void setInstructor(Instructor instructor) {
+        instructor.setDetail(this);
+        this.instructor = instructor;
+    }*/
 }

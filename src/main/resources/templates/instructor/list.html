@@ -22,7 +22,7 @@
         <td th:text="${inst.firstName}">first name</td>
         <td th:text="${inst.lastName}">last name</td>
         <td th:text="${inst.email}">email</td>
-        <td th:text="${inst.detail.website}">website</td>
+        <td th:text="(${inst.detail} != null) ? ${inst.detail.website} : ''">website</td>
         <td>
             <a th:href="@{/instructor/edit/{id}(id=${inst.id})}">edit</a>
             <span> / </span>

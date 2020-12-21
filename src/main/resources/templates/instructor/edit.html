@@ -5,16 +5,30 @@
     <title>Edit Instructor</title>
 </head>
 <body>
-<h4>Edit Instructor</h4>
-<form action="#" method="post" th:action="@{/instructor/update}" th:object="${instructor}">
+<h4>Edit Instructor
+    <!--<span th:if="${instructor.id > 0}">
+        <span th:if="${instructor.detail != null}">
+            <a th:href="@{/instructor-detail/{id}/edit/{did}(id=${instructor.id}, did=${instructor.detail.id})}">edit detail</a>
+        </span>
+        <span th:unless="${instructor.detail != null}">
+            <a th:href="@{/instructor-detail/{id}/edit/0(id=${instructor.id})}">edit detail</a>
+        </span>
+    </span>-->
+</h4>
+<div th:if="${exception != null}">
+    <span th:text="${exception.message}">exception message</span>
+</div>
+<form action="#" method="post" th:action="@{/instructor/save}" th:object="${instructor}">
     <input th:field="*{id}" type="hidden"/>
+    <input th:field="*{detail.id}" type="hidden"/>
     <p>First name: <input th:field="*{firstName}"/></p>
     <p>Last name: <input th:field="*{lastName}"/></p>
     <p>Email: <input th:field="*{email}"/></p>
-    <div th:field="*{detail}">
-        <input th:field="*{detail.id}" type="hidden"/>
-        <p>Website: <input th:field="*{detail.website}"/></p>
-    </div>
+    <p>
+        <label>Website: </label><input th:field="*{detail.website}"/><br/>
+        <span th:errors="*{detail.website}"
+              th:if="${#fields.hasErrors('detail.website')}">invalid website</span>
+    </p>
     <p>
         Course(s):
         <select multiple th:field="*{courseList}">
@@ -24,7 +38,7 @@
             </option>
         </select>
     </p>
-    <input type="submit" value="+ add instructor">
+    <input type="submit" value="save">
 </form>
 </body>
 </html>

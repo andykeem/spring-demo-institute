@@ -38,7 +38,7 @@ public class CourseController {
         return "course/edit";
     }
 
-    @PostMapping(path = "/update")
+    @PostMapping(path = "/save")
     public String add(@Valid @ModelAttribute("course") Course course,
                       BindingResult result) {
         log.info("course: {}", course);

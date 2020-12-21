@@ -9,7 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -31,7 +33,7 @@ public class InstructorController {
     @GetMapping(path = "/list")
     public String list(Model model) {
         List<Instructor> instructorList = instService.findAll();
-        log.info("inst. list: {}", instructorList);
+        log.info("instructor list: {}", instructorList);
         model.addAttribute(instructorList);
         return "instructor/list";
     }
@@ -47,23 +49,30 @@ public class InstructorController {
         return "instructor/edit";
     }
 
-    @PostMapping(path = "/update")
-    public String add(@Valid @ModelAttribute("instructor") Instructor instructor,
-                      BindingResult result, @RequestParam Map<String, String> params) {
+    @PostMapping(path = "/save")
+    public String save(@Valid @ModelAttribute("instructor") Instructor instructor,
+                       BindingResult result, Errors errors, @RequestParam Map<String, String> params,
+                       RedirectAttributes redirectAttrs) {
         log.info("instructor: {}", instructor);
         log.info("result: {}", result);
-//        log.info("params: {}", params);
+        log.info("errors: {}", errors);
+        log.info("params: {}", params);
         if (result.hasErrors()) {
-            return "/new";
+            return "redirect:/instructor/edit/" + instructor.getId();
         }
-        instService.save(instructor); // , params);
-        return "/home";
+        try {
+            instService.save(instructor); // , params);
+        } catch (Exception e) {
+            redirectAttrs.addFlashAttribute("exception", e);
+            return "redirect:/instructor/edit/" + instructor.getId();
+        }
+        return "redirect:/home";
     }
 
     @GetMapping(path = "/delete/{id}")
     public String delete(@PathVariable int id) {
         log.info("delete id: {}", id);
         instService.deleteById(id);
-        return "/home";
+        return "redirect:/home";
     }
 }

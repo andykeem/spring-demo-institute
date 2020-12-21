@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @Data
@@ -20,6 +22,12 @@ public class Course {
             CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "instructor_id")
     private Instructor instructor;
+
+    @OneToMany(mappedBy = "course", orphanRemoval = true)
+    private List<Review> reviews;
+
+    @ManyToMany(mappedBy = "courseSet")
+    private Set<Student> studentSet;
 
     public Course(String title) {
         this.title = title;

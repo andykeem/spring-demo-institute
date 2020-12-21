@@ -29,7 +29,7 @@ public class Instructor {
     @Pattern(regexp = "(.+)@(.+)\\.(.+)", message = "invalid email")
     private String email;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "instructor")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "instructor")
     private InstructorDetail detail;
 
     @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
