@@ -41,13 +41,6 @@ public class InstructorService {
     }
 
     public void save(Instructor inst) {
-        // TODO: 12/21/20 - can we save below line from the InstructionDetailService?
-//        inst.setInstructorDetail(inst.getDetail());
-
-        /*InstructorDetail detail = inst.getDetail();
-        detail.setInstructor(inst);
-        instDetailService.save(detail);*/
-
         instRepo.save(inst);
     }
 

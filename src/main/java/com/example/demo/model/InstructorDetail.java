@@ -18,15 +18,10 @@ public class InstructorDetail {
     private String website;
 
     @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "instructor_id") // , unique = true)
+    @JoinColumn(name = "instructor_id", unique = true)
     private Instructor instructor;
 
     public InstructorDetail(String website) {
         this.website = website;
     }
-
-    /*public void setInstructor(Instructor instructor) {
-        instructor.setDetail(this);
-        this.instructor = instructor;
-    }*/
 }

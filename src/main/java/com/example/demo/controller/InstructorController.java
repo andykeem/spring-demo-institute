@@ -61,7 +61,7 @@ public class InstructorController {
             return "redirect:/instructor/edit/" + instructor.getId();
         }
         try {
-            instService.save(instructor); // , params);
+            instService.save(instructor);
         } catch (Exception e) {
             redirectAttrs.addFlashAttribute("exception", e);
             return "redirect:/instructor/edit/" + instructor.getId();
