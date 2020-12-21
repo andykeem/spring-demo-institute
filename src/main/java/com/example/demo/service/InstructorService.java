@@ -1,16 +1,13 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Instructor;
-import com.example.demo.model.InstructorDetail;
 import com.example.demo.repository.InstructorRepository;
-import com.example.demo.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -28,16 +25,6 @@ public class InstructorService {
 
     public List<Instructor> findAll() {
         return instRepo.findAll();
-    }
-
-    public void save(Instructor inst, Map<String, String> postData) {
-        if (!StringUtil.isBlank(postData.get("website"))) {
-            InstructorDetail detail = new InstructorDetail(postData.get("website"));
-            inst.setDetail(detail);
-            log.info("inst detail: {}", detail);
-        }
-        log.info("instructor: {}", inst);
-        instRepo.save(inst);
     }
 
     public void save(Instructor inst) {
