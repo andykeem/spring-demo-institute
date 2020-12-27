@@ -7,11 +7,14 @@
 <body>
 <h4>Edit Course</h4>
 <form action="#" method="post" th:action="@{/course/save}" th:object="${course}">
+    <input th:field="*{id}" type="hidden">
     <p>
         <label>Title:</label> <input th:field="*{title}">
     </p>
     <p>
+        <label>Instructor:</label>
         <select th:field="*{instructor}">
+            <option value=""></option>
             <option th:each="inst : ${instructorList}"
                     th:text="${inst.name}" th:value="${inst.id}">instructor
             </option>

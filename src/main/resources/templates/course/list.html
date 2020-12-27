@@ -16,11 +16,12 @@
     <tbody th:each="course : ${courseList}">
     <tr>
         <td th:text="${course.title}">course title</td>
-        <td th:text="${course.instructor.name}">instructor</td>
+        <td th:text="${course.instructor != null} ? ${course.instructor.name}">instructor</td>
         <td>
             <a th:href="@{/course/edit/{id}(id=${course.id})}">edit</a>
             <span> / </span>
-            <a th:href="@{/course/delete/{id}(id=${course.id})}">delete</a>
+            <a onclick="return window.confirm('Do you really want to delete this course?')"
+               th:href="@{/course/delete/{id}(id=${course.id})}">delete</a>
         </td>
     </tr>
     </tbody>

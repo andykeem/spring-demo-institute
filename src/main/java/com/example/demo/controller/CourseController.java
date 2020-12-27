@@ -57,4 +57,10 @@ public class CourseController {
         model.addAttribute(courseList);
         return "course/list";
     }
+
+    @GetMapping(path = "/delete/{id}")
+    public String delete(@PathVariable int id) {
+        courseService.deleteById(id);
+        return "redirect:/course/list";
+    }
 }

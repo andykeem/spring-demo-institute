@@ -23,7 +23,7 @@ public class Course {
     @JoinColumn(name = "instructor_id")
     private Instructor instructor;
 
-    @OneToMany(mappedBy = "course", orphanRemoval = true)
+    @OneToMany(mappedBy = "course") // , orphanRemoval = true)
     private List<Review> reviews;
 
     @ManyToMany(mappedBy = "courseSet")

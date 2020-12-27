@@ -16,11 +16,15 @@ public class InstructorService {
     private final Logger log = LoggerFactory.getLogger(InstructorService.class);
     private final InstructorRepository instRepo;
     private final InstructorDetailService instDetailService;
+    private final CourseService courseService;
 
     @Autowired
-    public InstructorService(InstructorRepository instRepo, InstructorDetailService instDetailService) {
+    public InstructorService(InstructorRepository instRepo,
+                             InstructorDetailService instDetailService,
+                             CourseService courseService) {
         this.instRepo = instRepo;
         this.instDetailService = instDetailService;
+        this.courseService = courseService;
     }
 
     public List<Instructor> findAll() {
@@ -28,6 +32,9 @@ public class InstructorService {
     }
 
     public void save(Instructor inst) {
+        if (inst.getCourseList().isEmpty()) {
+            courseService.removeByInstructor(inst);
+        }
         instRepo.save(inst);
     }
 
